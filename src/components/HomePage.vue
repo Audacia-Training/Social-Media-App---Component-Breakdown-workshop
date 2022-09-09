@@ -1,5 +1,4 @@
 <script lang="ts">
-import { ref } from 'vue';
 import { SideMenuOption } from '../models/side-menu-option.model';
 import { Post } from '../models/post.model';
 import { WhatsHappening } from '../models/whats-happening.model';
