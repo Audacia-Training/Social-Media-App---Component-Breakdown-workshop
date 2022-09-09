@@ -3,8 +3,10 @@ import { SideMenuOption } from '../models/side-menu-option.model';
 import { Post } from '../models/post.model';
 import { WhatsHappening } from '../models/whats-happening.model';
 import { defineComponent } from 'vue';
+import SideMenu from './../components/side-menu/SideMenu.vue';
 
 export default defineComponent({
+  components: { SideMenu },
   data() {
     return {
       assetsFolder: './../assets/',
@@ -53,17 +55,8 @@ export default defineComponent({
 
 <template>
   <div class="home-page">
-    <div class="side-menu">
-      <img class="side-menu__logo" :src="getAsset('twitter.svg')" alt="" />
-      <div v-for="sideMenuOption in sideMenuOptions" class="side-menu__item">
-        <img
-          class="side-menu__logo"
-          :src="getAsset(sideMenuOption.icon)"
-          alt=""
-        />
-        <div class="side-menu__title">{{ sideMenuOption.name }}</div>
-      </div>
-    </div>
+    <!-- This is where the side menu component should go -->
+    <SideMenu />
     <div class="feed">
       <div class="feed-create-post">Create a new post</div>
       <div class="feed-posts">
