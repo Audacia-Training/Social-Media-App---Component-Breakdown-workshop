@@ -1,5 +1,4 @@
 <script lang="ts">
-import { SideMenuOption } from '../models/side-menu-option.model';
 import { Post } from '../models/post.model';
 import { WhatsHappening } from '../models/whats-happening.model';
 import { defineComponent } from 'vue';
@@ -10,16 +9,7 @@ export default defineComponent({
   data() {
     return {
       assetsFolder: './../assets/',
-      sideMenuOptions: [
-        new SideMenuOption('home-icon.svg', 'Home'),
-        new SideMenuOption('hashtag-icon.svg', 'Explore'),
-        new SideMenuOption('bell.svg', 'Notifications'),
-        new SideMenuOption('message.svg', 'Messages'),
-        new SideMenuOption('book-mark.svg', 'Bookmarks'),
-        new SideMenuOption('list.svg', 'Lists'),
-        new SideMenuOption('user.svg', 'Profile'),
-        new SideMenuOption('ellipsis.svg', 'More'),
-      ] as SideMenuOption[],
+
       feed: [
         new Post('The queen has died (sad face)'),
         new Post('Can wait for the weekend'),
