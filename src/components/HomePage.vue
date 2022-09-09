@@ -2,6 +2,7 @@
 import { SideMenuOption } from '../models/side-menu-option.model';
 import { Post } from '../models/post.model';
 import { WhatsHappening } from '../models/whats-happening.model';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   data() {
