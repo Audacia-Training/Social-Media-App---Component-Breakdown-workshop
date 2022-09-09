@@ -1,75 +1,79 @@
-<script setup lang="ts">
+<script lang="ts">
 import { ref } from 'vue';
 import { SideMenuOption } from '../models/side-menu-option.model';
 import { Post } from '../models/post.model';
 import { WhatsHappening } from '../models/whats-happening.model';
 
-defineProps<{ msg: string }>();
-
-const assetsFolder: string = './../assets/';
-
-const sideMenuOptions: Ref<SideMenuOption[]> = ref([]);
-sideMenuOptions.value = [
-  new SideMenuOption('home-icon.svg', 'Home'),
-  new SideMenuOption('hashtag-icon.svg', 'Explore'),
-  new SideMenuOption('fa-bell', 'Notifications'),
-  new SideMenuOption('fa-message', 'Messages'),
-  new SideMenuOption('fa-bookmark', 'Bookmarks'),
-  new SideMenuOption('fa-list-dropdown', 'Lists'),
-  new SideMenuOption('fa-user', 'Profile'),
-  new SideMenuOption('fa-ellipsis', 'More'),
-];
-
-const feed: Ref<Post[]> = ref([]);
-feed.value = [
-  new Post('The queen has died (sad face)'),
-  new Post('Can wait for the weekend'),
-  new Post('Dwayne "The Rock" Johnson'),
-];
-
-const thingsHappening: Ref<WhatsHappening[]> = ref([]);
-thingsHappening.value = [
-  new WhatsHappening(
-    'Queen Elizabeth II, 1926-2022',
-    'Queen Elizabeth II has died aged 96',
-    125636
-  ),
-  new WhatsHappening('Entertainment - Trending Worldwide', '#Aliabhatt', 16943),
-  new WhatsHappening(
-    'Royal Mail',
-    'Royal Mail due to go on strike again',
-    13123
-  ),
-];
-
-const count = ref(0);
-
-function getAsset(nameOfAsset: string): URL {
-  return new URL(nameOfAsset, import.meta.url);
-}
+export default defineComponent({
+  data() {
+    return {
+      assetsFolder: './../assets/',
+      sideMenuOptions: [
+        new SideMenuOption('home-icon.svg', 'Home'),
+        new SideMenuOption('hashtag-icon.svg', 'Explore'),
+        new SideMenuOption('bell.svg', 'Notifications'),
+        new SideMenuOption('message.svg', 'Messages'),
+        new SideMenuOption('book-mark.svg', 'Bookmarks'),
+        new SideMenuOption('list.svg', 'Lists'),
+        new SideMenuOption('user.svg', 'Profile'),
+        new SideMenuOption('ellipsis.svg', 'More'),
+      ] as SideMenuOption[],
+      feed: [
+        new Post('The queen has died (sad face)'),
+        new Post('Can wait for the weekend'),
+        new Post('Dwayne "The Rock" Johnson'),
+      ] as Post[],
+      thingsHappening: [
+        new WhatsHappening(
+          'Queen Elizabeth II, 1926-2022',
+          'Queen Elizabeth II has died aged 96',
+          125636
+        ),
+        new WhatsHappening(
+          'Entertainment - Trending Worldwide',
+          '#Aliabhatt',
+          16943
+        ),
+        new WhatsHappening(
+          'Royal Mail',
+          'Royal Mail due to go on strike again',
+          13123
+        ),
+      ] as WhatsHappening[],
+    };
+  },
+  created() {},
+  methods: {
+    getAsset(nameOfAsset: string): URL {
+      return new URL(assetsFolder + nameOfAsset, import.meta.url);
+    },
+  },
+});
 </script>
 
 <template>
   <div class="home-page">
     <div class="side-menu">
-      <img
-        class="side-menu__logo"
-        src="https://audaciaazurestorage.blob.core.windows.net/social-media/twitter.png"
-      />
+      <img class="side-menu__logo" :src="getAsset('twitter.svg')" alt="" />
       <div v-for="sideMenuOption in sideMenuOptions" class="side-menu__item">
-        <img :src="getAsset(sideMenuOption.icon)" alt="" />
-        {{ sideMenuOption.name }}
+        <img
+          class="side-menu__logo"
+          :src="getAsset(sideMenuOption.icon)"
+          alt=""
+        />
+        <div class="side-menu__title">{{ sideMenuOption.name }}</div>
       </div>
     </div>
     <div class="feed">
-      <div class="feed-create-post">Search the feed</div>
+      <div class="feed-create-post">Create a new post</div>
       <div class="feed-posts">
         <div class="post" v-for="post in feed">{{ post.content }}</div>
       </div>
     </div>
     <div class="misc">
       <div class="search">
-        <img src="" alt="" />
+        <img class="search-icon" :src="getAsset('search.svg')" alt="" />
+        Search for something
       </div>
       <div class="trending">
         Whats Happening
@@ -89,7 +93,6 @@ function getAsset(nameOfAsset: string): URL {
 <style lang="scss" scoped>
 .home-page {
   display: flex;
-  // justify-content: space-between;
   width: 100%;
   gap: 15px;
   padding: 10px;
@@ -99,15 +102,23 @@ function getAsset(nameOfAsset: string): URL {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    // Something hover?
 
-    .side-menu__logo {
-      width: 40px;
-      height: 40px;
+    &__logo {
+      width: 25px;
+      height: 25px;
+      padding: 2px;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(354deg)
+        brightness(106%) contrast(102%);
     }
 
-    .side-menu__item {
+    &__item {
       display: flex;
       align-content: flex-start;
+    }
+
+    &__title {
+      margin-left: 10px;
     }
   }
 
@@ -132,15 +143,32 @@ function getAsset(nameOfAsset: string): URL {
 
   .misc {
     .search {
+      display: flex;
+      padding: 10px;
+      gap: 5px;
+      border: raduis;
+
+      .search-icon {
+        width: 25px;
+        height: 25px;
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(354deg)
+          brightness(106%) contrast(102%);
+      }
     }
 
     .trending {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      border-radius: 4px;
+      background-color: #2e2e2e;
+      padding: 10px;
+
       .whats-happening {
         display: flex;
         flex-direction: column;
         gap: 5px;
-        border: 1px solid;
-        border-color: none;
+        border-width: 0;
 
         &__title {
           color: grey;
