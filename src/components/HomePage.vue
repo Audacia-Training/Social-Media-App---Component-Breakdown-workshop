@@ -45,7 +45,7 @@ export default defineComponent({
   created() {},
   methods: {
     getAsset(nameOfAsset: string): URL {
-      return new URL(assetsFolder + nameOfAsset, import.meta.url);
+      return new URL(this.assetsFolder + nameOfAsset, import.meta.url);
     },
   },
 });
